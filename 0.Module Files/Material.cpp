@@ -13,7 +13,7 @@ bool Lambertian::Scatter(const Ray& incident_ray, const HitRecord& record,
     }
 
     attenuation = albedo;
-    scattered_ray = Ray(record.intersection_point, scatter_direction);
+    scattered_ray = Ray(record.intersection_point, scatter_direction, incident_ray.Time());
     return true;
 }
 
@@ -23,7 +23,7 @@ bool Metal::Scatter(const Ray& incident_ray, const HitRecord& record,
     auto reflect_direction = Reflect(incident_ray.Direction(), record.normal);
     reflect_direction += fuzz * RandomUnitVector3();
     attenuation = albedo;
-    scattered_ray = Ray(record.intersection_point, reflect_direction);
+    scattered_ray = Ray(record.intersection_point, reflect_direction, incident_ray.Time());
     return Dot(record.normal, scattered_ray.Direction()) > 0;
 }
 
@@ -49,7 +49,7 @@ bool Dielectric::Scatter(const Ray& incident_ray, const HitRecord& record,
         scattered_direction = Refract(incident_direction, record.normal, incident_eta_over_transmitted_eta);
     }
 
-    scattered_ray = Ray(record.intersection_point, scattered_direction);
+    scattered_ray = Ray(record.intersection_point, scattered_direction, incident_ray.Time());
     return true;
 }
 

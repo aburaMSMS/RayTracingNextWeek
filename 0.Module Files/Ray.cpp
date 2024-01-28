@@ -10,6 +10,10 @@ Vector3 Ray::Direction() const
     return direction;
 }
 
+double Ray::Time() const
+{
+    return time;
+}
 
 Point3 Ray::At(double t) const
 {

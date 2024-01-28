@@ -1,7 +1,15 @@
 #include"Sphere.h"
 
+Sphere::Sphere(const Point3& _start_center, const Point3& _end_center, double _radius, std::shared_ptr<Material> _material)
+    : start_center(_start_center), radius(_radius), material(_material)
+{
+    moving_direction = _end_center - _start_center;
+}
+
 bool Sphere::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const
 {
+    auto center = CurrentCenter(ray.Time());
+
     auto ray_origin = ray.Origin();
     auto ray_direction = ray.Direction();
     auto center_to_ray_origin = ray_origin - center;
@@ -35,4 +43,9 @@ bool Sphere::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) cons
     hit_record.material = material;
 
     return true;
+}
+
+Point3 Sphere::CurrentCenter(double time) const
+{
+    return start_center + time * moving_direction;
 }

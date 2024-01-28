@@ -40,6 +40,8 @@
     <ClCompile Include="0.Module Files\Ray.cpp" />
     <ClCompile Include="0.Module Files\Sphere.cpp" />
     <ClCompile Include="0.Module Files\Vector3.cpp" />
+    <ClCompile Include="2.Motion Blur\main.cpp" />
+    <ClCompile Include="2.Motion Blur\main2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

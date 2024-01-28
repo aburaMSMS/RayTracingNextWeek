@@ -69,8 +69,9 @@ Ray Camera::GetRay(int i, int j) const
     auto pixel_sample = pixel_center + SampleRandomOffset();
 
     Point3 ray_origin = defocus_angle <= 0. ? camera_center : DefocusDiskSample();
+    auto time = RandomDouble();
 
-    return Ray(ray_origin, pixel_sample - ray_origin);
+    return Ray(ray_origin, pixel_sample - ray_origin, time);
 }
 
 Vector3 Camera::SampleRandomOffset() const
