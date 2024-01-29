@@ -31,13 +31,13 @@ int main()
                     // Diffuse
                     auto albedo = Color::Random() * Color::Random();
                     sphere_material = std::make_shared<Lambertian>(albedo);
-                    auto end_center = center + Vector3(0., RandomDouble(0,0.5), 0.);
+                    auto end_center = center + Vector3(0., RandomDouble(0, 0.4), 0.);
                     world.Add(std::make_shared<Sphere>(center, end_center, 0.2, sphere_material));
                 }
                 else if (choose_material < 0.9) {
                     // Metal
-                    auto albedo = Color::Random(0.7, 1);
-                    auto fuzz = RandomDouble(0, 0.3);
+                    auto albedo = Color::Random(0.3, 1);
+                    auto fuzz = RandomDouble(0, 0.1);
                     sphere_material = std::make_shared<Metal>(albedo, fuzz);
                     world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
                 }

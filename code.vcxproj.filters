@@ -77,8 +77,5 @@
     <ClCompile Include="2.Motion Blur\main2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="2.Motion Blur\main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
