@@ -7,6 +7,10 @@
 class Sphere : public Hittable
 {
 public:
+    static void IntersectionPointToCoordinates(
+        const Point3& intersection_point, double& u, double& v);
+
+public:
     Sphere(const Point3& _start_center, double _radius, std::shared_ptr<Material> _material);
 
     Sphere(const Point3& _start_center, const Point3& _end_center, double _radius, std::shared_ptr<Material> _material);

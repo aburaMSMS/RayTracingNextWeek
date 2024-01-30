@@ -3,6 +3,8 @@
 #include"Vector3.h"
 #include"Color.h"
 #include"memory"
+#include"Image.h"
+#include"Interval.h"
 
 class Texture
 {
@@ -19,7 +21,7 @@ public:
 
     SolidColor(double red, double green, double blue) :value({ red,green,blue }) {}
 
-    Color Value(double u, double v, const Point3& point) const;
+    Color Value(double u, double v, const Point3& point) const override;
 
 private:
     Color value;
@@ -33,13 +35,24 @@ public:
 
     CheckerTexture(double _scale, const Color& color1, const Color& color2)
         :scale(_scale),
-        even(std::make_shared<SolidColor>(color1)), 
+        even(std::make_shared<SolidColor>(color1)),
         odd(std::make_shared<SolidColor>(color2)) {}
 
-    Color Value(double u, double v, const Point3& point) const;
+    Color Value(double u, double v, const Point3& point) const override;
 
 private:
     double scale;
     std::shared_ptr<Texture> even;
     std::shared_ptr<Texture> odd;
+};
+
+class ImageTexture :public Texture
+{
+public:
+    ImageTexture(const char* image_filename) :image(image_filename) {}
+
+    Color Value(double u, double v, const Point3& point) const override;
+
+private:
+    Image image;
 };

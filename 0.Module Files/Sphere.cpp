@@ -1,5 +1,14 @@
 #include"Sphere.h"
 
+void Sphere::IntersectionPointToCoordinates(const Point3& intersection_point, double& u, double& v)
+{
+    auto phi = std::atan2(-intersection_point.Z(), intersection_point.X()) + PI;
+    auto theta = std::acos(-intersection_point.Y());
+
+    u = phi / (2. * PI);
+    v = theta / PI;
+}
+
 Sphere::Sphere(const Point3& _start_center, double _radius, std::shared_ptr<Material> _material)
     : start_center(_start_center), radius(_radius), material(_material)
 {
@@ -57,6 +66,7 @@ bool Sphere::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) cons
     hit_record.intersection_point = ray.At(t);
     auto outward_normal = (hit_record.intersection_point - center) / radius;
     hit_record.SetFrontFaceAndNormal(ray, outward_normal);
+    IntersectionPointToCoordinates(outward_normal, hit_record.u, hit_record.v);
     hit_record.material = material;
 
     return true;

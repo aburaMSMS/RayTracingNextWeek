@@ -109,6 +109,5 @@ Color Camera::RayColor(const Ray& ray, int depth, const Hittable& world) const
     }
 
     auto unit_direction = UnitVector(ray.Direction());
-    auto alpha = std::abs(unit_direction.Y() + unit_direction.X()) / 2;
-    return (1. - alpha) * Color(1.) + alpha * Color(0.2, 0.5, 0.9);
+    return Color(0.8, 0.8, 1.);
 }
