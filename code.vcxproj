@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="0.External\stb_image.h" />
+    <ClInclude Include="External\stb_image.h" />
     <ClInclude Include="0.Header Files\AABB.h" />
     <ClInclude Include="0.Header Files\BVH.h" />
     <ClInclude Include="0.Header Files\Camera.h" />
@@ -106,16 +106,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>0.Header Files;0.External;$(IncludePath)</IncludePath>
+    <IncludePath>0.Header Files;External;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>0.Header Files;0.External;$(IncludePath)</IncludePath>
+    <IncludePath>0.Header Files;External;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>0.Header Files;0.External;$(IncludePath)</IncludePath>
+    <IncludePath>0.Header Files;External;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>0.Header Files;0.External;$(IncludePath)</IncludePath>
+    <IncludePath>0.Header Files;External;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
