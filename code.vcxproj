@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="0.Header Files\AABB.h" />
+    <ClInclude Include="0.Header Files\BVH.h" />
     <ClInclude Include="0.Header Files\Camera.h" />
     <ClInclude Include="0.Header Files\Color.h" />
     <ClInclude Include="0.Header Files\global.h" />
@@ -31,6 +33,8 @@
     <ClInclude Include="0.Header Files\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="0.Module Files\AABB.cpp" />
+    <ClCompile Include="0.Module Files\BVH.cpp" />
     <ClCompile Include="0.Module Files\Camera.cpp" />
     <ClCompile Include="0.Module Files\Color.cpp" />
     <ClCompile Include="0.Module Files\Hittable.cpp" />
@@ -41,6 +45,7 @@
     <ClCompile Include="0.Module Files\Sphere.cpp" />
     <ClCompile Include="0.Module Files\Vector3.cpp" />
     <ClCompile Include="2.Motion Blur\main2.cpp" />
+    <ClCompile Include="3.Bounding Volume Hierarchies\main3.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -1,9 +1,26 @@
 #include"Sphere.h"
 
+Sphere::Sphere(const Point3& _start_center, double _radius, std::shared_ptr<Material> _material)
+    : start_center(_start_center), radius(_radius), material(_material)
+{
+    auto radius_vector3 = Vector3(radius);
+    bounding_box = AABB(_start_center - radius_vector3, _start_center + radius_vector3);
+}
+
 Sphere::Sphere(const Point3& _start_center, const Point3& _end_center, double _radius, std::shared_ptr<Material> _material)
     : start_center(_start_center), radius(_radius), material(_material)
 {
     moving_direction = _end_center - _start_center;
+
+    auto radius_vector3 = Vector3(radius);
+    AABB start_box(_start_center - radius_vector3, _start_center + radius_vector3);
+    AABB end_box(_end_center - radius_vector3, _end_center + radius_vector3);
+    bounding_box = AABB(start_box, end_box);
+}
+
+AABB Sphere::BoundingBox() const
+{
+    return bounding_box;
 }
 
 bool Sphere::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const

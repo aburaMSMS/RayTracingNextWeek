@@ -22,3 +22,13 @@ double Interval::Clamp(double x) const
     }
     return x;
 }
+
+double Interval::Size() const
+{
+    return max - min;
+}
+
+Interval Interval::Expand(double delta) const
+{
+    return Interval(min - delta / 2., max + delta / 2.);
+}

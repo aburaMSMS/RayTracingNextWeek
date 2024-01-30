@@ -1,13 +1,24 @@
 #include"HittableList.h"
 
+HittableList:: HittableList(const std::shared_ptr<Hittable> object)
+{
+    Add(object);
+}
+
 void HittableList::Clear()
 {
     objects.clear();
 }
 
-void HittableList::Add(std::shared_ptr<Hittable> object)
+void HittableList::Add(const std::shared_ptr<Hittable> object)
 {
     objects.push_back(object);
+    bounding_box = AABB(bounding_box, object->BoundingBox());
+}
+
+size_t HittableList::Size() const
+{
+    return objects.size();
 }
 
 bool HittableList::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const
@@ -27,4 +38,9 @@ bool HittableList::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record
     }
 
     return is_hit_anything;
+}
+
+AABB HittableList::BoundingBox() const
+{
+    return bounding_box;
 }

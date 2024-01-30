@@ -2,6 +2,7 @@
 
 #include"Ray.h"
 #include"Interval.h"
+#include"AABB.h"
 
 class Material;
 
@@ -23,4 +24,6 @@ public:
     virtual ~Hittable() = default;
 
     virtual bool IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const = 0;
+
+    virtual AABB BoundingBox() const = 0;
 };

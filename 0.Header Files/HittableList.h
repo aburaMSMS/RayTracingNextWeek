@@ -2,6 +2,7 @@
 
 #include"Hittable.h"
 #include"Interval.h"
+#include"AABB.h"
 
 #include<vector>
 #include<memory>
@@ -12,10 +13,18 @@ public:
     std::vector<std::shared_ptr<Hittable>> objects;
 
     HittableList() {}
+    HittableList(const std::shared_ptr<Hittable> object);
 
     void Clear();
 
-    void Add(std::shared_ptr<Hittable> object);
+    void Add(const std::shared_ptr<Hittable> object);
+
+    size_t Size() const;
 
     bool IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const override;
+
+    AABB BoundingBox() const override;
+
+private:
+    AABB bounding_box;
 };

@@ -21,3 +21,8 @@ inline double RandomDouble(double min = 0., double max = 1.)
 
     return dis(gen);
 }
+
+inline int RandomInt(int min = 0, int max = 1)
+{
+    return static_cast<int>(RandomDouble(min, max + 1));
+}
