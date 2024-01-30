@@ -13,6 +13,8 @@ public:
     Vector3 normal;
     double t = 0.;
     std::shared_ptr<Material> material;
+    double u = 0.;
+    double v = 0.;
     bool front_face = true;
 
     void SetFrontFaceAndNormal(const Ray& ray, const Vector3& outward_normal);

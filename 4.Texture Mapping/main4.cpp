@@ -1,4 +1,4 @@
-#if 0
+#if 1
 
 #include<iostream>
 #include"global.h"
@@ -6,12 +6,14 @@
 #include"HittableList.h"
 #include"Sphere.h"
 #include"BVH.h"
+#include"Texture.h"
 
 int main()
 {
     HittableList world;
 
-    auto ground_material = std::make_shared<Lambertian>(Color(0.5, 0.5, 0.5));
+    auto ground_material = std::make_shared<Lambertian>(
+        std::make_shared<CheckerTexture>(3., Color(0.7, 0.3, 0.6), Color(0.9, 1.0, 0.8)));
     world.Add(std::make_shared<Sphere>(Point3(0, -1000, 0), 1000, ground_material));
 
     for (int a = -11; a < 11; a++)
@@ -29,21 +31,19 @@ int main()
 
                 if (choose_material < 0.5)
                 {
-                    // Diffuse
                     auto albedo = Color::Random() * Color::Random();
                     sphere_material = std::make_shared<Lambertian>(albedo);
-                    auto end_center = center + Vector3(0., RandomDouble(0, 0.4), 0.);
-                    world.Add(std::make_shared<Sphere>(center, end_center, 0.2, sphere_material));
+                    world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
                 }
-                else if (choose_material < 0.9) {
-                    // Metal
+                else if (choose_material < 0.9)
+                {
                     auto albedo = Color::Random(0.3, 1);
                     auto fuzz = RandomDouble(0, 0.1);
                     sphere_material = std::make_shared<Metal>(albedo, fuzz);
                     world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
                 }
-                else {
-                    // Glass
+                else
+                {
                     sphere_material = std::make_shared<Dielectric>(1.5);
                     world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
                 }

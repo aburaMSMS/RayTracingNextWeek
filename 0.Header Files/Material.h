@@ -2,6 +2,7 @@
 
 #include"Color.h"
 #include"Ray.h"
+#include"Texture.h"
 
 class HitRecord;
 
@@ -18,13 +19,15 @@ public:
 class Lambertian :public Material
 {
 public:
-    Lambertian(const Color& _albedo) :albedo(_albedo) {}
+    Lambertian(const Color& _albedo) :albedo(std::make_shared<SolidColor>(_albedo)) {}
+
+    Lambertian(const std::shared_ptr<Texture> texture) :albedo(texture) {}
 
     bool Scatter(const Ray& incident_ray, const HitRecord& record,
         Color& attenuation, Ray& scattered_ray) const override;
 
 private:
-    Color albedo;
+    std::shared_ptr<Texture> albedo;
 };
 
 class Metal : public Material
@@ -42,7 +45,7 @@ private:
 };
 
 
-class Dielectric : public Material 
+class Dielectric : public Material
 {
 private:
     static double FresnelInSchlick(double cos_theta, double incident_eta_over_transmitted_eta);

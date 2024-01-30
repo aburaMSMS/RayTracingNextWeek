@@ -51,6 +51,9 @@
     <ClInclude Include="0.Header Files\BVH.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="0.Header Files\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="0.Module Files\Camera.cpp">
@@ -90,6 +93,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="0.Module Files\BVH.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="0.Module Files\Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="4.Texture Mapping\main4.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
