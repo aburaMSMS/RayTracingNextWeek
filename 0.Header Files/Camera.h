@@ -30,6 +30,7 @@ public:
     int samples_per_pixel = 10;
     int max_depth = 10;
     double vertical_fov = 90.;
+    Color background;
 
     Point3 look_from = Point3(0.);
     Point3 look_at = Point3(0., 0., -1.);
@@ -37,6 +38,7 @@ public:
 
     double defocus_angle = 0.;
     double focus_distance = 1.;
+
 
 private:
     int image_height = 0;

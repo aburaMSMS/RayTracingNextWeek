@@ -11,6 +11,8 @@ class Material
 public:
     virtual ~Material() = default;
 
+    virtual Color Emit(double u, double v, const Point3& point) const;
+
     virtual bool Scatter(const Ray& incident_ray, const HitRecord& record,
         Color& attenuation, Ray& scattered_ray) const = 0;
 };
@@ -58,4 +60,18 @@ public:
 
 private:
     double refractive_index;
+};
+
+class DiffuseLight :public Material
+{
+public:
+    DiffuseLight(std::shared_ptr<Texture> _light_texture) :light_texture(_light_texture) {}
+    DiffuseLight(Color color = { 0. }) :light_texture(std::make_shared<SolidColor>(color)) {}
+
+    Color Emit(double u, double v, const Point3& point) const;
+
+    bool Scatter(const Ray& incident_ray, const HitRecord& record,
+        Color& attenuation, Ray& scattered_ray) const override;
+private:
+    std::shared_ptr<Texture> light_texture;
 };

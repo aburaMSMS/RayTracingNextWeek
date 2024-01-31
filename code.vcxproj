@@ -58,6 +58,7 @@
     <ClCompile Include="4.Texture Mapping\main4.cpp" />
     <ClCompile Include="5.Perlin Noise\main5.cpp" />
     <ClCompile Include="6.Quadrilaterals\main6.cpp" />
+    <ClCompile Include="7.Lights\main7.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

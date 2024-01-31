@@ -2,6 +2,11 @@
 
 #include"Hittable.h"
 
+Color Material::Emit(double u, double v, const Point3& point) const
+{
+    return { 0. };
+}
+
 bool Lambertian::Scatter(const Ray& incident_ray, const HitRecord& record,
     Color& attenuation, Ray& scattered_ray) const
 {
@@ -59,4 +64,15 @@ double Dielectric::FresnelInSchlick(double cos_theta, double incident_eta_over_t
         (1 + incident_eta_over_transmitted_eta) / (1 + incident_eta_over_transmitted_eta);
     return f0 + ((1 - f0) * (1 - cos_theta)) * ((1 - cos_theta) * (1 - cos_theta)) *
         ((1 - cos_theta) * (1 - cos_theta)); // F¦È
+}
+
+Color DiffuseLight::Emit(double u, double v, const Point3& point) const
+{
+    return light_texture->Value(u, v, point);
+}
+
+bool DiffuseLight::Scatter(const Ray& incident_ray, const HitRecord& record,
+    Color& attenuation, Ray& scattered_ray) const
+{
+    return false;
 }

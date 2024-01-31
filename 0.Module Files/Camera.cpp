@@ -97,17 +97,21 @@ Color Camera::RayColor(const Ray& ray, int depth, const Hittable& world) const
         return Color(0.);
     }
 
-    if (world.IsHit(ray, Interval(0.0001, _INFINITY), record))
+    if (!world.IsHit(ray, Interval(0.0001, _INFINITY), record))
     {
-        Ray scattered_ray;
-        Color attenuation(1.);
-        if (record.material->Scatter(ray, record, attenuation, scattered_ray))
-        {
-            return attenuation * RayColor(scattered_ray, depth - 1, world);
-        }
-        return Color(0.);
+        return background;
     }
 
-    auto unit_direction = UnitVector(ray.Direction());
-    return Color(0.8, 0.8, 1.);
+    Ray scattered_ray;
+    Color attenuation(1.);
+    auto color_from_emission = record.material->Emit(record.u, record.v, record.intersection_point);
+
+    if (!record.material->Scatter(ray, record, attenuation, scattered_ray))
+    {
+        return color_from_emission;
+    }
+
+    auto color_from_scatter = attenuation * RayColor(scattered_ray, depth - 1, world);
+
+    return color_from_emission + color_from_scatter;
 }

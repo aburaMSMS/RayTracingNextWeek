@@ -128,5 +128,8 @@
     <ClCompile Include="6.Quadrilaterals\main6.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="7.Lights\main7.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
