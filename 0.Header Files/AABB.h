@@ -15,6 +15,8 @@ public:
     const Interval& Axis(int axis_index) const;
 
     bool IsHit(const Ray& ray, Interval t_range) const;
+
+    AABB Pad() const;
 public:
     Interval x, y, z;
 };

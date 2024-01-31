@@ -62,3 +62,13 @@ bool AABB::IsHit(const Ray& ray, Interval t_range) const
 
     return true;
 }
+
+AABB AABB::Pad() const
+{
+    double delta = 0.0001;
+    Interval new_x = (x.Size() >= delta) ? x : x.Expand(delta);
+    Interval new_y = (y.Size() >= delta) ? y : y.Expand(delta);
+    Interval new_z = (z.Size() >= delta) ? z : z.Expand(delta);
+
+    return AABB(new_x, new_y, new_z);
+}

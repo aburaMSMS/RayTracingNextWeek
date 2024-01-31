@@ -63,6 +63,9 @@
     <ClInclude Include="0.Header Files\Perlin.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="0.Header Files\Quadrilateral.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="0.Module Files\Camera.cpp">
@@ -117,6 +120,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="0.Module Files\Perlin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="0.Module Files\Quadrilateral.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Quadrilaterals\main6.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

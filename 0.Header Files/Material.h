@@ -33,7 +33,7 @@ private:
 class Metal : public Material
 {
 public:
-    Metal(const Color& _albedo, double _fuzz = 1.)
+    Metal(const Color& _albedo, double _fuzz = 0.)
         : albedo(_albedo), fuzz(_fuzz < 1 ? _fuzz : 1) {}
 
     bool Scatter(const Ray& incident_ray, const HitRecord& record,
