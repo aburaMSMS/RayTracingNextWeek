@@ -23,6 +23,20 @@ int* Perlin::GeneratePerm()
 
     return perm;
 }
+double Perlin::TrilinearInterpolation(double volumes[2][2][2], double x, double y, double z)
+{
+    double c00 = volumes[0][0][0] * (1 - x) + volumes[1][0][0] * x;
+    double c01 = volumes[0][0][1] * (1 - x) + volumes[1][0][1] * x;
+    double c10 = volumes[0][1][0] * (1 - x) + volumes[1][1][0] * x;
+    double c11 = volumes[0][1][1] * (1 - x) + volumes[1][1][1] * x;
+
+    double c0 = c00 * (1 - y) + c10 * y;
+    double c1 = c01 * (1 - y) + c11 * y;
+
+    double c = c0 * (1 - z) + c1 * z;
+
+    return c;
+}
 
 Perlin::Perlin()
 {
@@ -40,11 +54,29 @@ Perlin::Perlin()
 
 double Perlin::Noise(const Point3& point) const
 {
-    auto i = static_cast<int>(4 * point.X()) & (points_num - 1);
-    auto j = static_cast<int>(4 * point.Y()) & (points_num - 1);
-    auto k = static_cast<int>(4 * point.Z()) & (points_num - 1);
+    auto x = point.X() - std::floor(point.X());
+    auto y = point.Y() - std::floor(point.Y());
+    auto z = point.Z() - std::floor(point.Z());
 
-    return random_doubles[x_perm[i] ^ y_perm[j] ^ z_perm[k]];
+    auto i = static_cast<int>(std::floor(point.X()));
+    auto j = static_cast<int>(std::floor(point.Y()));
+    auto k = static_cast<int>(std::floor(point.Z()));
+
+    double volumes[2][2][2]{};
+
+    for (int delta_i = 0; delta_i < 2; delta_i++)
+    {
+        for (int delta_j = 0; delta_j < 2; delta_j++)
+        {
+            for (int delta_k = 0; delta_k < 2; delta_k++)
+            {
+                volumes[delta_i][delta_j][delta_k] = random_doubles[
+                    x_perm[(i + delta_i) & 255] ^ y_perm[(j + delta_j) & 255] ^ z_perm[(k + delta_k) & 255]];
+            }
+        }
+    }
+
+    return TrilinearInterpolation(volumes, x, y, z);
 }
 
 Perlin::~Perlin()

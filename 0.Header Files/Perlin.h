@@ -10,6 +10,8 @@ private:
 
     static int* GeneratePerm();
 
+    static double TrilinearInterpolation(double volume[2][2][2], double x, double y, double z);
+
 private:
     static const int points_num = 256;
 
