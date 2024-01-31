@@ -35,5 +35,5 @@ Color ImageTexture::Value(double u, double v, const Point3& point) const
 
 Color NoiseTexture::Value(double u, double v, const Point3& point) const
 {
-    return Color(1.) * perlin.Noise(scale * point);
+    return Color(1.) * perlin.Turbulence(scale * point);
 }

@@ -44,7 +44,7 @@ double Perlin::TrilinearInterpolation(Vector3 volumes[2][2][2], double x, double
         }
     }
 
-    return value * 0.5 + 0.5;
+    return value;
 }
 
 Perlin::Perlin()
@@ -86,6 +86,21 @@ double Perlin::Noise(const Point3& point) const
     }
 
     return TrilinearInterpolation(volumes, x, y, z);
+}
+
+double Perlin::Turbulence(Point3 point, int depth) const
+{
+    auto value = 0.;
+    auto weight = 1.;
+
+    for (int i = 0; i < depth; i++)
+    {
+        value += Noise(point) * weight;
+        weight *= 0.5;
+        point *= 2.;
+    }
+
+    return std::fabs(value);
 }
 
 Perlin::~Perlin()

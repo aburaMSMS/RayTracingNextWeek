@@ -20,6 +20,8 @@ public:
 
     double Noise(const Point3& point) const;
 
+    double Turbulence(Point3 point, int depth = 7) const;
+
     ~Perlin();
 
 private:
