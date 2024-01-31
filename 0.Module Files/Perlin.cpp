@@ -58,6 +58,10 @@ double Perlin::Noise(const Point3& point) const
     auto y = point.Y() - std::floor(point.Y());
     auto z = point.Z() - std::floor(point.Z());
 
+    x = x * x * (3. - 2. * x);
+    y = y * y * (3. - 2. * y);
+    z = z * z * (3. - 2. * z);
+
     auto i = static_cast<int>(std::floor(point.X()));
     auto j = static_cast<int>(std::floor(point.Y()));
     auto k = static_cast<int>(std::floor(point.Z()));
