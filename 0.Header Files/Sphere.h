@@ -6,7 +6,7 @@
 
 class Sphere : public Hittable
 {
-public:
+private:
     static void IntersectionPointToCoordinates(
         const Point3& intersection_point, double& u, double& v);
 

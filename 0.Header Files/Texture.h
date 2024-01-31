@@ -5,6 +5,7 @@
 #include"memory"
 #include"Image.h"
 #include"Interval.h"
+#include"Perlin.h"
 
 class Texture
 {
@@ -55,4 +56,13 @@ public:
 
 private:
     Image image;
+};
+
+class NoiseTexture:public Texture
+{
+public:
+    Color Value(double u, double v, const Point3& point) const override;
+
+private:
+    Perlin perlin;
 };

@@ -54,10 +54,13 @@
     <ClInclude Include="0.Header Files\Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="0.External\stb_image.h">
+    <ClInclude Include="0.Header Files\Image.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="0.Header Files\Image.h">
+    <ClInclude Include="External\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="0.Header Files\Perlin.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -108,6 +111,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="0.Module Files\Image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Perlin Noise\main5.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="0.Module Files\Perlin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

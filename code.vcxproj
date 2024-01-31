@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="0.Header Files\Perlin.h" />
     <ClInclude Include="External\stb_image.h" />
     <ClInclude Include="0.Header Files\AABB.h" />
     <ClInclude Include="0.Header Files\BVH.h" />
@@ -45,6 +46,7 @@
     <ClCompile Include="0.Module Files\Image.cpp" />
     <ClCompile Include="0.Module Files\Interval.cpp" />
     <ClCompile Include="0.Module Files\Material.cpp" />
+    <ClCompile Include="0.Module Files\Perlin.cpp" />
     <ClCompile Include="0.Module Files\Ray.cpp" />
     <ClCompile Include="0.Module Files\Sphere.cpp" />
     <ClCompile Include="0.Module Files\Texture.cpp" />
@@ -52,6 +54,7 @@
     <ClCompile Include="2.Motion Blur\main2.cpp" />
     <ClCompile Include="3.Bounding Volume Hierarchies\main3.cpp" />
     <ClCompile Include="4.Texture Mapping\main4.cpp" />
+    <ClCompile Include="5.Perlin Noise\main5.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

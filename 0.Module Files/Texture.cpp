@@ -32,3 +32,8 @@ Color ImageTexture::Value(double u, double v, const Point3& point) const
 
     return { scale * pixel[0], scale * pixel[1], scale * pixel[2] };
 }
+
+Color NoiseTexture::Value(double u, double v, const Point3& point) const
+{
+    return Color(1.) * perlin.Noise(point);
+}
