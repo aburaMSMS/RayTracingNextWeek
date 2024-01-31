@@ -61,11 +61,11 @@ private:
 class NoiseTexture :public Texture
 {
 public:
-    NoiseTexture(double _scale) :scale(_scale) {}
+    NoiseTexture(double _scale = 1.) :scale(_scale) {}
 
     Color Value(double u, double v, const Point3& point) const override;
 
 private:
     Perlin perlin;
-    double scale = 1.;
+    double scale;
 };
