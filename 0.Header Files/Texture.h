@@ -58,11 +58,14 @@ private:
     Image image;
 };
 
-class NoiseTexture:public Texture
+class NoiseTexture :public Texture
 {
 public:
+    NoiseTexture(double _scale) :scale(_scale) {}
+
     Color Value(double u, double v, const Point3& point) const override;
 
 private:
     Perlin perlin;
+    double scale = 1.;
 };
