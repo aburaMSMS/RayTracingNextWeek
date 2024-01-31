@@ -23,28 +23,37 @@ int* Perlin::GeneratePerm()
 
     return perm;
 }
-double Perlin::TrilinearInterpolation(double volumes[2][2][2], double x, double y, double z)
+double Perlin::TrilinearInterpolation(Vector3 volumes[2][2][2], double x, double y, double z)
 {
-    double c00 = volumes[0][0][0] * (1 - x) + volumes[1][0][0] * x;
-    double c01 = volumes[0][0][1] * (1 - x) + volumes[1][0][1] * x;
-    double c10 = volumes[0][1][0] * (1 - x) + volumes[1][1][0] * x;
-    double c11 = volumes[0][1][1] * (1 - x) + volumes[1][1][1] * x;
+    auto xx = x * x * (3. - 2. * x);
+    auto yy = y * y * (3. - 2. * y);
+    auto zz = z * z * (3. - 2. * z);
 
-    double c0 = c00 * (1 - y) + c10 * y;
-    double c1 = c01 * (1 - y) + c11 * y;
+    auto value = 0.0;
 
-    double c = c0 * (1 - z) + c1 * z;
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            for (int k = 0; k < 2; k++)
+            {
+                Vector3 weight_vector3(x - i, y - j, z - k);
+                value += (i * xx + (1 - i) * (1 - xx)) * (j * yy + (1 - j) * (1 - yy)) *
+                    (k * zz + (1 - k) * (1 - zz)) * Dot(volumes[i][j][k], weight_vector3);
+            }
+        }
+    }
 
-    return c;
+    return value * 0.5 + 0.5;
 }
 
 Perlin::Perlin()
 {
-    random_doubles = new double[points_num];
+    random_vector3s = new Vector3[points_num];
 
     for (int i = 0; i < points_num; i++)
     {
-        random_doubles[i] = RandomDouble();
+        random_vector3s[i] = RandomUnitVector3();
     }
 
     x_perm = GeneratePerm();
@@ -58,15 +67,11 @@ double Perlin::Noise(const Point3& point) const
     auto y = point.Y() - std::floor(point.Y());
     auto z = point.Z() - std::floor(point.Z());
 
-    x = x * x * (3. - 2. * x);
-    y = y * y * (3. - 2. * y);
-    z = z * z * (3. - 2. * z);
-
     auto i = static_cast<int>(std::floor(point.X()));
     auto j = static_cast<int>(std::floor(point.Y()));
     auto k = static_cast<int>(std::floor(point.Z()));
 
-    double volumes[2][2][2]{};
+    Vector3 volumes[2][2][2]{};
 
     for (int delta_i = 0; delta_i < 2; delta_i++)
     {
@@ -74,7 +79,7 @@ double Perlin::Noise(const Point3& point) const
         {
             for (int delta_k = 0; delta_k < 2; delta_k++)
             {
-                volumes[delta_i][delta_j][delta_k] = random_doubles[
+                volumes[delta_i][delta_j][delta_k] = random_vector3s[
                     x_perm[(i + delta_i) & 255] ^ y_perm[(j + delta_j) & 255] ^ z_perm[(k + delta_k) & 255]];
             }
         }
@@ -85,7 +90,7 @@ double Perlin::Noise(const Point3& point) const
 
 Perlin::~Perlin()
 {
-    delete[] random_doubles;
+    delete[] random_vector3s;
     delete[] x_perm;
     delete[] y_perm;
     delete[] z_perm;
