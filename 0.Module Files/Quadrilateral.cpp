@@ -1,7 +1,7 @@
-#include"Quadrilateral.h"
+#include "Quadrilateral.h"
 
-Quadrilateral::Quadrilateral(const Point3& _first_vertex, const Vector3& _u, const Vector3& _v, std::shared_ptr<Material>_material)
-    :first_vertex(_first_vertex), u(_u), v(_v), material(_material)
+Quadrilateral::Quadrilateral(const Point3 &_first_vertex, const Vector3 &_u, const Vector3 &_v, std::shared_ptr<Material> _material)
+    : first_vertex(_first_vertex), u(_u), v(_v), material(_material)
 {
     auto n = Cross(u, v);
     normal = UnitVector(n);
@@ -16,7 +16,7 @@ AABB Quadrilateral::BoundingBox() const
     return bounding_box;
 }
 
-bool Quadrilateral::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const
+bool Quadrilateral::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const
 {
     auto divisor = Dot(normal, ray.Direction());
 
@@ -51,4 +51,28 @@ bool Quadrilateral::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_recor
     hit_record.SetFrontFaceAndNormal(ray, normal);
 
     return true;
+}
+
+std::shared_ptr<HittableList> Box(const Point3 &point1, const Point3 &point2,
+                                  std::shared_ptr<Material> material)
+{
+    auto box_sides = std::make_shared<HittableList>();
+
+    Point3 min_point{
+        std::fmin(point1.X(), point2.X()), std::fmin(point1.Y(), point2.Y()), std::fmin(point1.Z(), point2.Z())};
+    Point3 max_point{
+        std::fmax(point1.X(), point2.X()), std::fmax(point1.Y(), point2.Y()), std::fmax(point1.Z(), point2.Z())};
+
+    Vector3 x_direction{max_point.X() - min_point.X(), 0., 0.};
+    Vector3 y_direction{0., max_point.Y() - min_point.Y(), 0.};
+    Vector3 z_direction{0., 0., max_point.Z() - min_point.Z()};
+
+    box_sides->Add(std::make_shared<Quadrilateral>(min_point, x_direction, y_direction, material));
+    box_sides->Add(std::make_shared<Quadrilateral>(min_point, x_direction, z_direction, material));
+    box_sides->Add(std::make_shared<Quadrilateral>(min_point, y_direction, z_direction, material));
+    box_sides->Add(std::make_shared<Quadrilateral>(max_point, -x_direction, -y_direction, material));
+    box_sides->Add(std::make_shared<Quadrilateral>(max_point, -x_direction, -z_direction, material));
+    box_sides->Add(std::make_shared<Quadrilateral>(max_point, -y_direction, -z_direction, material));
+
+    return box_sides;
 }

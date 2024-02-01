@@ -1,13 +1,13 @@
-#include"Camera.h"
+#include "Camera.h"
 
-void Camera::Render(const HittableList& world)
+void Camera::Render(const HittableList &world)
 {
     Initialize();
 
     // Render
 
     std::cout << "P3\n"
-        << image_width << " " << image_height << "\n255\n";
+              << image_width << " " << image_height << "\n255\n";
 
     for (int j = 0; j < image_height; ++j)
     {
@@ -54,8 +54,7 @@ void Camera::Initialize()
     pixel_delta_v = viewport_v / image_height;
 
     // Calculate the location of the upper left pixel.
-    auto viewport_upper_left = camera_center - focus_distance * w
-        - viewport_u / 2. - viewport_v / 2.;
+    auto viewport_upper_left = camera_center - focus_distance * w - viewport_u / 2. - viewport_v / 2.;
     pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
 
     auto defocus_radius = focus_distance * std::tan(Deg2Rad(defocus_angle) / 2.);
@@ -88,7 +87,7 @@ Point3 Camera::DefocusDiskSample() const
     return camera_center + point[0] * defocus_disk_u + point[1] * defocus_disk_v;
 }
 
-Color Camera::RayColor(const Ray& ray, int depth, const Hittable& world) const
+Color Camera::RayColor(const Ray &ray, int depth, const Hittable &world) const
 {
     HitRecord record;
 

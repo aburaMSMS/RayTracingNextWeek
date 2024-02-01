@@ -92,9 +92,6 @@
     <ClCompile Include="0.Module Files\Sphere.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="0.Module Files\Vector3.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="2.Motion Blur\main2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="7.Lights\main7.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="8.Instances\main8.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

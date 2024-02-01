@@ -1,14 +1,14 @@
-#include"Material.h"
+#include "Material.h"
 
-#include"Hittable.h"
+#include "Hittable.h"
 
-Color Material::Emit(double u, double v, const Point3& point) const
+Color Material::Emit(double u, double v, const Point3 &point) const
 {
-    return { 0. };
+    return Color{0.};
 }
 
-bool Lambertian::Scatter(const Ray& incident_ray, const HitRecord& record,
-    Color& attenuation, Ray& scattered_ray) const
+bool Lambertian::Scatter(const Ray &incident_ray, const HitRecord &record,
+                         Color &attenuation, Ray &scattered_ray) const
 {
     auto scatter_direction = record.normal + RandomUnitVector3();
 
@@ -22,8 +22,27 @@ bool Lambertian::Scatter(const Ray& incident_ray, const HitRecord& record,
     return true;
 }
 
-bool Metal::Scatter(const Ray& incident_ray, const HitRecord& record,
-    Color& attenuation, Ray& scattered_ray) const
+bool OrenNayarDiffuse::Scatter(const Ray &incident_ray, const HitRecord &record,
+                               Color &attenuation, Ray &scattered_ray) const
+{
+    auto scatter_direction = RandomOnHemisphere(record.normal);
+
+    auto A = 0.18 * rou_d / (1. + rou_d);
+    auto theta_i = Dot(incident_ray.Direction(), record.normal) /
+                   (incident_ray.Direction().Length() * record.normal.Length());
+    auto theta_o = Dot(scatter_direction, record.normal) /
+                   (scatter_direction.Length() * record.normal.Length());
+
+    auto alpha = (theta_i + theta_o) / 2.;
+    auto beta = (theta_i - theta_o) / 2.;
+
+    attenuation = 1. / PI * rou_d * (1. + A * std::fmax(0, std::cos(theta_i)) * std::fmax(0, std::cos(theta_o)) * std::sin(alpha) * std::tan(beta));
+    scattered_ray = Ray(record.intersection_point, scatter_direction, incident_ray.Time());
+    return true;
+}
+
+bool Metal::Scatter(const Ray &incident_ray, const HitRecord &record,
+                    Color &attenuation, Ray &scattered_ray) const
 {
     auto reflect_direction = Reflect(incident_ray.Direction(), record.normal);
     reflect_direction += fuzz * RandomUnitVector3();
@@ -32,8 +51,8 @@ bool Metal::Scatter(const Ray& incident_ray, const HitRecord& record,
     return Dot(record.normal, scattered_ray.Direction()) > 0;
 }
 
-bool Dielectric::Scatter(const Ray& incident_ray, const HitRecord& record,
-    Color& attenuation, Ray& scattered_ray) const
+bool Dielectric::Scatter(const Ray &incident_ray, const HitRecord &record,
+                         Color &attenuation, Ray &scattered_ray) const
 {
     auto incident_eta_over_transmitted_eta = record.front_face ? 1. / refractive_index : refractive_index;
 
@@ -61,18 +80,18 @@ bool Dielectric::Scatter(const Ray& incident_ray, const HitRecord& record,
 double Dielectric::FresnelInSchlick(double cos_theta, double incident_eta_over_transmitted_eta)
 {
     auto f0 = (1 - incident_eta_over_transmitted_eta) * (1 - incident_eta_over_transmitted_eta) /
-        (1 + incident_eta_over_transmitted_eta) / (1 + incident_eta_over_transmitted_eta);
+              (1 + incident_eta_over_transmitted_eta) / (1 + incident_eta_over_transmitted_eta);
     return f0 + ((1 - f0) * (1 - cos_theta)) * ((1 - cos_theta) * (1 - cos_theta)) *
-        ((1 - cos_theta) * (1 - cos_theta)); // F¦È
+                    ((1 - cos_theta) * (1 - cos_theta)); // Fï¿½ï¿½
 }
 
-Color DiffuseLight::Emit(double u, double v, const Point3& point) const
+Color DiffuseLight::Emit(double u, double v, const Point3 &point) const
 {
     return light_texture->Value(u, v, point);
 }
 
-bool DiffuseLight::Scatter(const Ray& incident_ray, const HitRecord& record,
-    Color& attenuation, Ray& scattered_ray) const
+bool DiffuseLight::Scatter(const Ray &incident_ray, const HitRecord &record,
+                           Color &attenuation, Ray &scattered_ray) const
 {
     return false;
 }
