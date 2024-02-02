@@ -73,8 +73,3 @@ bool BVH::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const
 
     return hit_left || hit_right;
 }
-
-AABB BVH::BoundingBox() const
-{
-    return bounding_box;
-}

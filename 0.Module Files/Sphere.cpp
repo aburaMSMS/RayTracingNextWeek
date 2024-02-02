@@ -1,6 +1,6 @@
-#include"Sphere.h"
+#include "Sphere.h"
 
-void Sphere::IntersectionPointToCoordinates(const Point3& intersection_point, double& u, double& v)
+void Sphere::IntersectionPointToCoordinates(const Point3 &intersection_point, double &u, double &v)
 {
     auto phi = std::atan2(-intersection_point.Z(), intersection_point.X()) + PI;
     auto theta = std::acos(-intersection_point.Y());
@@ -9,14 +9,14 @@ void Sphere::IntersectionPointToCoordinates(const Point3& intersection_point, do
     v = theta / PI;
 }
 
-Sphere::Sphere(const Point3& _start_center, double _radius, std::shared_ptr<Material> _material)
+Sphere::Sphere(const Point3 &_start_center, double _radius, std::shared_ptr<Material> _material)
     : start_center(_start_center), radius(_radius), material(_material)
 {
     auto radius_vector3 = Vector3(radius);
     bounding_box = AABB(_start_center - radius_vector3, _start_center + radius_vector3);
 }
 
-Sphere::Sphere(const Point3& _start_center, const Point3& _end_center, double _radius, std::shared_ptr<Material> _material)
+Sphere::Sphere(const Point3 &_start_center, const Point3 &_end_center, double _radius, std::shared_ptr<Material> _material)
     : start_center(_start_center), radius(_radius), material(_material)
 {
     moving_direction = _end_center - _start_center;
@@ -27,12 +27,7 @@ Sphere::Sphere(const Point3& _start_center, const Point3& _end_center, double _r
     bounding_box = AABB(start_box, end_box);
 }
 
-AABB Sphere::BoundingBox() const
-{
-    return bounding_box;
-}
-
-bool Sphere::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const
+bool Sphere::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const
 {
     auto center = CurrentCenter(ray.Time());
 

@@ -27,43 +27,8 @@ public:
 
     virtual bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const = 0;
 
-    virtual AABB BoundingBox() const = 0;
-};
+    AABB BoundingBox() const;
 
-class Translate : public Hittable
-{
-public:
-    Translate(std::shared_ptr<Hittable> _object, const Vector3 &_offset);
-
-    bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
-
-    AABB BoundingBox() const override;
-
-private:
-    std::shared_ptr<Hittable> object;
-    Vector3 offset;
-    AABB bounding_box;
-};
-
-class Rotate : public Hittable
-{
-public:
-    Rotate(std::shared_ptr<Hittable> _object, double theta, int _axis_index)
-        : Rotate(_object, theta, (_axis_index + 1) % 3, (_axis_index + 2) % 3) {}
-    Rotate(std::shared_ptr<Hittable> _object, double theta, int _from_axis, int _to_axis);
-
-    bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
-
-    AABB BoundingBox() const override;
-
-private:
-    void RotatePoint3(Point3 &point, bool rotate_direction = true) const;
-
-private:
-    std::shared_ptr<Hittable> object;
-    double cos_theta;
-    double sin_theta;
-    int from_axis;
-    int to_axis;
+protected:
     AABB bounding_box;
 };

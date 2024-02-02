@@ -11,15 +11,12 @@ class Quadrilateral : public Hittable
 public:
     Quadrilateral(const Point3 &_first_vertex, const Vector3 &u, const Vector3 &v, std::shared_ptr<Material> _material);
 
-    AABB BoundingBox() const override;
-
     bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const;
 
 private:
     Point3 first_vertex;
     Vector3 u, v;
     std::shared_ptr<Material> material;
-    AABB bounding_box;
     Vector3 normal;
     double d;  // ax + by + cz = d
     Vector3 w; // α = w⋅(p×v) β = w⋅(u×p)

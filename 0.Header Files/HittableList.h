@@ -22,9 +22,4 @@ public:
     size_t Size() const;
 
     bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
-
-    AABB BoundingBox() const override;
-
-private:
-    AABB bounding_box;
 };

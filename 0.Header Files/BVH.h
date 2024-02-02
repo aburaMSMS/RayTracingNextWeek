@@ -26,10 +26,7 @@ public:
 
     bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
 
-    AABB BoundingBox() const;
-
 private:
     std::shared_ptr<Hittable> left;
     std::shared_ptr<Hittable> right;
-    AABB bounding_box;
 };

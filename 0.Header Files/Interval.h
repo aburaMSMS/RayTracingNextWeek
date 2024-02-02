@@ -39,3 +39,13 @@ inline Interval operator+(double offset, const Interval &interval)
 {
     return interval + offset;
 }
+
+inline Interval operator*(const Interval &interval, double scale)
+{
+    return Interval{interval.min * scale, interval.max * scale};
+}
+
+inline Interval operator*(double scale, const Interval &interval)
+{
+    return interval * scale;
+}

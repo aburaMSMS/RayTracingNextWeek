@@ -37,3 +37,13 @@ inline AABB operator+(const Vector3 &offset, const AABB &bounding_box)
 {
     return bounding_box + offset;
 }
+
+inline AABB operator*(const AABB &bounding_box, double scale)
+{
+    return AABB{bounding_box.x * scale, bounding_box.y * scale, bounding_box.z * scale};
+}
+
+inline AABB operator*(double scale, const AABB &bounding_box)
+{
+    return bounding_box * scale;
+}

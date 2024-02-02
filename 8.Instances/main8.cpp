@@ -1,4 +1,4 @@
-#if 1
+#if 0
 
 #include <iostream>
 #include "global.h"
@@ -7,6 +7,7 @@
 #include "Sphere.h"
 #include "BVH.h"
 #include "Quadrilateral.h"
+#include "Transformation.h"
 
 int main()
 {
@@ -48,8 +49,8 @@ int main()
     Camera camera;
 
     camera.aspect_ratio = 1.0;
-    camera.image_width = 800;
-    camera.samples_per_pixel = 400;
+    camera.image_width = 400;
+    camera.samples_per_pixel = 200;
     camera.max_depth = 50;
     camera.background = Color{0.};
 

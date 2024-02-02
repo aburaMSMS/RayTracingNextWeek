@@ -15,8 +15,6 @@ public:
 
     Sphere(const Point3 &_start_center, const Point3 &_end_center, double _radius, std::shared_ptr<Material> _material);
 
-    AABB BoundingBox() const override;
-
     bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
 
 private:
@@ -27,5 +25,4 @@ private:
     double radius;
     std::shared_ptr<Material> material;
     Vector3 moving_direction;
-    AABB bounding_box;
 };

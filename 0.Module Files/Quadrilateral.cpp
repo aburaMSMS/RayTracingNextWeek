@@ -11,11 +11,6 @@ Quadrilateral::Quadrilateral(const Point3 &_first_vertex, const Vector3 &_u, con
     bounding_box = AABB(first_vertex, first_vertex + u + v).Pad();
 }
 
-AABB Quadrilateral::BoundingBox() const
-{
-    return bounding_box;
-}
-
 bool Quadrilateral::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const
 {
     auto divisor = Dot(normal, ray.Direction());

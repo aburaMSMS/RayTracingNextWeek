@@ -39,8 +39,3 @@ bool HittableList::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record
 
     return is_hit_anything;
 }
-
-AABB HittableList::BoundingBox() const
-{
-    return bounding_box;
-}
