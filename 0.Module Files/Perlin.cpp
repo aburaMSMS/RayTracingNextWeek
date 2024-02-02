@@ -1,6 +1,6 @@
-#include"Perlin.h"
+#include "Perlin.h"
 
-void Perlin::Permute(int* perm)
+void Perlin::Permute(int *perm)
 {
     for (int i = points_num - 1; i > 0; i--)
     {
@@ -10,7 +10,7 @@ void Perlin::Permute(int* perm)
     }
 }
 
-int* Perlin::GeneratePerm()
+int *Perlin::GeneratePerm()
 {
     auto perm = new int[points_num];
 
@@ -39,7 +39,7 @@ double Perlin::TrilinearInterpolation(Vector3 volumes[2][2][2], double x, double
             {
                 Vector3 weight_vector3(x - i, y - j, z - k);
                 value += (i * xx + (1 - i) * (1 - xx)) * (j * yy + (1 - j) * (1 - yy)) *
-                    (k * zz + (1 - k) * (1 - zz)) * Dot(volumes[i][j][k], weight_vector3);
+                         (k * zz + (1 - k) * (1 - zz)) * Dot(volumes[i][j][k], weight_vector3);
             }
         }
     }
@@ -61,7 +61,7 @@ Perlin::Perlin()
     z_perm = GeneratePerm();
 }
 
-double Perlin::Noise(const Point3& point) const
+double Perlin::Noise(const Point3 &point) const
 {
     auto x = point.X() - std::floor(point.X());
     auto y = point.Y() - std::floor(point.Y());
@@ -79,8 +79,7 @@ double Perlin::Noise(const Point3& point) const
         {
             for (int delta_k = 0; delta_k < 2; delta_k++)
             {
-                volumes[delta_i][delta_j][delta_k] = random_vector3s[
-                    x_perm[(i + delta_i) & 255] ^ y_perm[(j + delta_j) & 255] ^ z_perm[(k + delta_k) & 255]];
+                volumes[delta_i][delta_j][delta_k] = random_vector3s[x_perm[(i + delta_i) & 255] ^ y_perm[(j + delta_j) & 255] ^ z_perm[(k + delta_k) & 255]];
             }
         }
     }

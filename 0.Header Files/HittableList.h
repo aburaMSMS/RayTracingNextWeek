@@ -1,13 +1,13 @@
 #pragma once
 
-#include"Hittable.h"
-#include"Interval.h"
-#include"AABB.h"
+#include "Hittable.h"
+#include "Interval.h"
+#include "AABB.h"
 
-#include<vector>
-#include<memory>
+#include <vector>
+#include <memory>
 
-class HittableList :public Hittable
+class HittableList : public Hittable
 {
 public:
     std::vector<std::shared_ptr<Hittable>> objects;
@@ -21,7 +21,7 @@ public:
 
     size_t Size() const;
 
-    bool IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const override;
+    bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
 
     AABB BoundingBox() const override;
 

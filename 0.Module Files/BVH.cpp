@@ -1,36 +1,36 @@
-#include"BVH.h"
+#include "BVH.h"
 
-bool BVH::BoxComparer(const std::shared_ptr<Hittable>box1, const std::shared_ptr<Hittable>box2,
-    int axis_index)
+bool BVH::BoxComparer(const std::shared_ptr<Hittable> box1, const std::shared_ptr<Hittable> box2,
+                      int axis_index)
 {
     return box1->BoundingBox().Axis(axis_index).min <
-        box2->BoundingBox().Axis(axis_index).min;
+           box2->BoundingBox().Axis(axis_index).min;
 }
 
-bool BVH::BoxXComparer(const std::shared_ptr<Hittable>box1, const std::shared_ptr<Hittable>box2)
+bool BVH::BoxXComparer(const std::shared_ptr<Hittable> box1, const std::shared_ptr<Hittable> box2)
 {
     return BoxComparer(box1, box2, 0);
 }
 
-bool BVH::BoxYComparer(const std::shared_ptr<Hittable>box1, const std::shared_ptr<Hittable>box2)
+bool BVH::BoxYComparer(const std::shared_ptr<Hittable> box1, const std::shared_ptr<Hittable> box2)
 {
     return BoxComparer(box1, box2, 0);
 }
 
-bool BVH::BoxZComparer(const std::shared_ptr<Hittable>box1, const std::shared_ptr<Hittable>box2)
+bool BVH::BoxZComparer(const std::shared_ptr<Hittable> box1, const std::shared_ptr<Hittable> box2)
 {
     return BoxComparer(box1, box2, 0);
 }
 
-BVH::BVH(const std::vector<std::shared_ptr<Hittable>>& source_objects, size_t start, size_t end)
+BVH::BVH(const std::vector<std::shared_ptr<Hittable>> &source_objects, size_t start, size_t end)
 {
     auto objects = source_objects;
     auto size = end - start;
 
     auto axis_index = RandomInt(0, 2);
-    auto Comparer = axis_index == 0 ? BoxXComparer
-        : axis_index == 1 ? BoxYComparer
-        : BoxZComparer;
+    auto Comparer = axis_index == 0   ? BoxXComparer
+                    : axis_index == 1 ? BoxYComparer
+                                      : BoxZComparer;
 
     if (size == 1)
     {
@@ -61,7 +61,7 @@ BVH::BVH(const std::vector<std::shared_ptr<Hittable>>& source_objects, size_t st
     bounding_box = AABB(left->BoundingBox(), right->BoundingBox());
 }
 
-bool BVH::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const
+bool BVH::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const
 {
     if (!bounding_box.IsHit(ray, t_range))
     {

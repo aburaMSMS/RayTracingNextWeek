@@ -1,45 +1,45 @@
 #pragma once
 
-#include"Vector3.h"
-#include"Color.h"
-#include"memory"
-#include"Image.h"
-#include"Interval.h"
-#include"Perlin.h"
+#include "Vector3.h"
+#include "Color.h"
+#include "memory"
+#include "Image.h"
+#include "Interval.h"
+#include "Perlin.h"
 
 class Texture
 {
 public:
     ~Texture() = default;
 
-    virtual Color Value(double u, double v, const Point3& point) const = 0;
+    virtual Color Value(double u, double v, const Point3 &point) const = 0;
 };
 
-class SolidColor :public Texture
+class SolidColor : public Texture
 {
 public:
-    SolidColor(const Color& _value) :value(_value) {}
+    SolidColor(const Color &_value) : value(_value) {}
 
-    SolidColor(double red, double green, double blue) :value({ red,green,blue }) {}
+    SolidColor(double red, double green, double blue) : value({red, green, blue}) {}
 
-    Color Value(double u, double v, const Point3& point) const override;
+    Color Value(double u, double v, const Point3 &point) const override;
 
 private:
     Color value;
 };
 
-class CheckerTexture :public Texture
+class CheckerTexture : public Texture
 {
 public:
-    CheckerTexture(double _scale, std::shared_ptr<Texture>_even, std::shared_ptr<Texture> _odd)
-        :scale(_scale), even(_even), odd(_odd) {}
+    CheckerTexture(double _scale, std::shared_ptr<Texture> _even, std::shared_ptr<Texture> _odd)
+        : scale(_scale), even(_even), odd(_odd) {}
 
-    CheckerTexture(double _scale, const Color& color1, const Color& color2)
-        :scale(_scale),
-        even(std::make_shared<SolidColor>(color1)),
-        odd(std::make_shared<SolidColor>(color2)) {}
+    CheckerTexture(double _scale, const Color &color1, const Color &color2)
+        : scale(_scale),
+          even(std::make_shared<SolidColor>(color1)),
+          odd(std::make_shared<SolidColor>(color2)) {}
 
-    Color Value(double u, double v, const Point3& point) const override;
+    Color Value(double u, double v, const Point3 &point) const override;
 
 private:
     double scale;
@@ -47,23 +47,23 @@ private:
     std::shared_ptr<Texture> odd;
 };
 
-class ImageTexture :public Texture
+class ImageTexture : public Texture
 {
 public:
-    ImageTexture(const char* image_filename) :image(image_filename) {}
+    ImageTexture(const char *image_filename) : image(image_filename) {}
 
-    Color Value(double u, double v, const Point3& point) const override;
+    Color Value(double u, double v, const Point3 &point) const override;
 
 private:
     Image image;
 };
 
-class NoiseTexture :public Texture
+class NoiseTexture : public Texture
 {
 public:
-    NoiseTexture(double _scale = 1.) :scale(_scale) {}
+    NoiseTexture(double _scale = 1.) : scale(_scale) {}
 
-    Color Value(double u, double v, const Point3& point) const override;
+    Color Value(double u, double v, const Point3 &point) const override;
 
 private:
     Perlin perlin;

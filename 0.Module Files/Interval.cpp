@@ -1,4 +1,4 @@
-#include"Interval.h"
+#include "Interval.h"
 
 bool Interval::Contains(double value) const
 {

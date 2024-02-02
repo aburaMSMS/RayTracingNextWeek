@@ -1,6 +1,6 @@
-#include"HittableList.h"
+#include "HittableList.h"
 
-HittableList:: HittableList(const std::shared_ptr<Hittable> object)
+HittableList::HittableList(const std::shared_ptr<Hittable> object)
 {
     Add(object);
 }
@@ -21,13 +21,13 @@ size_t HittableList::Size() const
     return objects.size();
 }
 
-bool HittableList::IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const
+bool HittableList::IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const
 {
     HitRecord temp_record;
     auto closest_t = t_range.max;
     bool is_hit_anything = false;
 
-    for (const auto& object : objects)
+    for (const auto &object : objects)
     {
         if (object->IsHit(ray, Interval(t_range.min, closest_t), temp_record))
         {

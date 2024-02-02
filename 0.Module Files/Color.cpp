@@ -2,7 +2,7 @@
 
 #include "Interval.h"
 
-void WriteColor(std::ostream& out, Color pixel_color, double scale)
+void WriteColor(std::ostream &out, Color pixel_color, double scale)
 {
     static const Interval interval(0., 0.999);
     // Write the translated [0, 255] value of each color component.

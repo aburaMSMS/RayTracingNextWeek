@@ -4,14 +4,14 @@
 #include "Color.h"
 #include "Hittable.h"
 #include "HittableList.h"
-#include"Material.h"
+#include "Material.h"
 
 #include <iostream>
 
 class Camera
 {
 public:
-    void Render(const HittableList& world);
+    void Render(const HittableList &world);
 
 private:
     void Initialize();
@@ -22,7 +22,7 @@ private:
 
     Point3 DefocusDiskSample() const;
 
-    Color RayColor(const Ray& ray, int depth, const Hittable& world) const;
+    Color RayColor(const Ray &ray, int depth, const Hittable &world) const;
 
 public:
     double aspect_ratio = 1.;
@@ -38,7 +38,6 @@ public:
 
     double defocus_angle = 0.;
     double focus_distance = 1.;
-
 
 private:
     int image_height = 0;

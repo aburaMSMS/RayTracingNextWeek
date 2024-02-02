@@ -6,8 +6,8 @@ class Ray
 {
 public:
     Ray() {}
-    Ray(const Point3& _origin, const Vector3& _direction, double _time = 0.)
-        : origin(_origin), direction(UnitVector(_direction)), time(_time) {};
+    Ray(const Point3 &_origin, const Vector3 &_direction, double _time = 0.)
+        : origin(_origin), direction(UnitVector(_direction)), time(_time){};
 
     Point3 Origin() const;
     Vector3 Direction() const;

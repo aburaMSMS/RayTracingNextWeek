@@ -1,8 +1,8 @@
 #pragma once
 
-#include"Ray.h"
-#include"Interval.h"
-#include"AABB.h"
+#include "Ray.h"
+#include "Interval.h"
+#include "AABB.h"
 
 class Material;
 
@@ -17,7 +17,7 @@ public:
     double v = 0.;
     bool front_face = true;
 
-    void SetFrontFaceAndNormal(const Ray& ray, const Vector3& outward_normal);
+    void SetFrontFaceAndNormal(const Ray &ray, const Vector3 &outward_normal);
 };
 
 class Hittable
@@ -25,7 +25,7 @@ class Hittable
 public:
     virtual ~Hittable() = default;
 
-    virtual bool IsHit(const Ray& ray, Interval t_range, HitRecord& hit_record) const = 0;
+    virtual bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const = 0;
 
     virtual AABB BoundingBox() const = 0;
 };

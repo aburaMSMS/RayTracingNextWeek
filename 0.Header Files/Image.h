@@ -1,40 +1,41 @@
 #pragma once
 
 #ifdef _MSC_VER
-#pragma warning (push, 0)
+#pragma warning(push, 0)
 #endif
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_FAILURE_USERMSG
 
-
-#include<cstdlib>
-#include<iostream>
+#include <cstdlib>
+#include <iostream>
 
 class Image
 {
 public:
     static int Clamp(int x, int low, int high);
+
 public:
-    Image(const char* image_filename);
+    Image(const char *image_filename);
 
     bool Load(const std::string filename);
 
     int Width() const;
     int Height() const;
 
-    const unsigned char* PixelData(int x, int y) const;
+    const unsigned char *PixelData(int x, int y) const;
 
     bool IsEmpty() const;
 
     ~Image();
+
 private:
     const int bytes_per_pixel = 3;
-    unsigned char* data = nullptr;
+    unsigned char *data = nullptr;
     int image_width = 0, image_height = 0;
     int bytes_per_scanline = 0;
 };
 
 #ifdef _MSC_VER
-#pragma warning (pop)
+#pragma warning(pop)
 #endif

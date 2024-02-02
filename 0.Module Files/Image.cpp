@@ -1,5 +1,5 @@
-#include"Image.h"
-#include"stb_image.h"
+#include "Image.h"
+#include "stb_image.h"
 
 int Image::Clamp(int x, int low, int high)
 {
@@ -16,18 +16,26 @@ int Image::Clamp(int x, int low, int high)
     return high - 1;
 }
 
-Image::Image(const char* image_filename)
+Image::Image(const char *image_filename)
 {
     std::string filename(image_filename);
 
-    if (Load(filename)) return;
-    if (Load("Images/" + filename)) return;
-    if (Load("../Images/" + filename)) return;
-    if (Load("../../Images/" + filename)) return;
-    if (Load("../../../Images/" + filename)) return;
-    if (Load("../../../../Images/" + filename)) return;
-    if (Load("../../../../../Images/" + filename)) return;
-    if (Load("../../../../../../Images/" + filename)) return;
+    if (Load(filename))
+        return;
+    if (Load("Images/" + filename))
+        return;
+    if (Load("../Images/" + filename))
+        return;
+    if (Load("../../Images/" + filename))
+        return;
+    if (Load("../../../Images/" + filename))
+        return;
+    if (Load("../../../../Images/" + filename))
+        return;
+    if (Load("../../../../../Images/" + filename))
+        return;
+    if (Load("../../../../../../Images/" + filename))
+        return;
 
     std::cerr << "ERROR: Could not load image file '" << image_filename << "'.\n";
 }
@@ -50,9 +58,9 @@ int Image::Height() const
     return (data == nullptr) ? 0 : image_height;
 }
 
-const unsigned char* Image::PixelData(int x, int y) const
+const unsigned char *Image::PixelData(int x, int y) const
 {
-    static unsigned char empty_data_result[] = { 255, 0, 255 };
+    static unsigned char empty_data_result[] = {255, 0, 255};
 
     if (data == nullptr)
     {
@@ -72,5 +80,5 @@ bool Image::IsEmpty() const
 
 Image::~Image()
 {
-   STBI_FREE(data);
+    STBI_FREE(data);
 }
