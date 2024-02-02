@@ -26,8 +26,8 @@ public:
     double Z() const { return e[2]; }
 
     Vector3 operator-() const { return Vector3(-e[0], -e[1], -e[2]); }
-    double operator[](int i) const { return e[i]; }
-    double &operator[](int i) { return e[i]; }
+    double operator[](size_t i) const { return e[i]; }
+    double &operator[](size_t i) { return e[i]; }
 
     Vector3 &operator+=(const Vector3 &v)
     {

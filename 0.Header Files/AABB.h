@@ -17,6 +17,11 @@ public:
 
     bool IsHit(const Ray &ray, Interval t_range) const;
 
+    inline Point3 At(size_t i, size_t j, size_t k) const
+    {
+        return Point3{x.min + i * x.Size(), y.min + j * y.Size(), z.min + k * z.Size()};
+    }
+
     AABB Pad() const;
 
 public:
