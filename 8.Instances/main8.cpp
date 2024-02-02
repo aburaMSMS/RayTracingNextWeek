@@ -21,8 +21,8 @@ int main()
         Point3{555., 0., 0.}, Vector3{0., 555., 0.}, Vector3{0., 0., 555.}, green));
     world.Add(std::make_shared<Quadrilateral>(
         Point3{0., 0., 0.}, Vector3{0., 555., 0.}, Vector3{0., 0., 555.}, red));
-     world.Add(std::make_shared<Quadrilateral>(
-         Point3{343., 554., 332.}, Vector3{-130., 0., 0.}, Vector3{0., 0., -105.}, light));
+    world.Add(std::make_shared<Quadrilateral>(
+        Point3{343., 554., 332.}, Vector3{-130., 0., 0.}, Vector3{0., 0., -105.}, light));
     world.Add(std::make_shared<Quadrilateral>(
         Point3{0., 0., 0.}, Vector3{555., 0., 0.}, Vector3{0., 0., 555.}, white));
     world.Add(std::make_shared<Quadrilateral>(
@@ -30,8 +30,10 @@ int main()
     world.Add(std::make_shared<Quadrilateral>(
         Point3{0., 0., 555.}, Vector3{555., 0., 0.}, Vector3{0., 555., 0.}, white));
 
-    
-    world.Add(Box(Point3{130., 0., 65.}, Point3{295., 165., 230.}, white));
+    std::shared_ptr<Hittable> box1 = Box(Point3{0.}, Point3{165., 165., 165.}, white);
+    box1 = std::make_shared<Translate>(box1, Vector3{130., 0., 65.});
+    world.Add(box1);
+
     world.Add(Box(Point3{265., 0., 295.}, Point3{430., 330., 460.}, white));
 
     world = HittableList(std::make_shared<BVH>(world));

@@ -29,3 +29,18 @@ public:
 
     virtual AABB BoundingBox() const = 0;
 };
+
+class Translate : public Hittable
+{
+public:
+    Translate(std::shared_ptr<Hittable> _object, const Vector3 &_offset);
+
+    bool IsHit(const Ray &ray, Interval t_range, HitRecord &hit_record) const override;
+
+    AABB BoundingBox() const override;
+
+private:
+    std::shared_ptr<Hittable> object;
+    Vector3 offset;
+    AABB bounding_box;
+};
