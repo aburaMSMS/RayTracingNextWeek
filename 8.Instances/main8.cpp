@@ -47,7 +47,6 @@ int main()
     world = HittableList(std::make_shared<BVH>(world));
 
     Camera camera;
-
     camera.aspect_ratio = 1.0;
     camera.image_width = 400;
     camera.samples_per_pixel = 200;

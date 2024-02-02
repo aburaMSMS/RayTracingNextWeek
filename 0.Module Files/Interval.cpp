@@ -1,5 +1,8 @@
 #include "Interval.h"
 
+const Interval Interval::empty;
+const Interval Interval::universe{-_INFINITY, INFINITY};
+
 bool Interval::Contains(double value) const
 {
     return value >= min && value <= max;

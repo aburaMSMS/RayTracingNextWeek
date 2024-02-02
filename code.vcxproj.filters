@@ -69,6 +69,9 @@
     <ClInclude Include="0.Header Files\Transformation.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="0.Header Files\ConstantMedium.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="0.Module Files\Camera.cpp">
@@ -135,6 +138,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="0.Module Files\Transformation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="0.Module Files\ConstantMedium.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Volumes\main9.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

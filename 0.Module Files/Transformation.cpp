@@ -27,8 +27,8 @@ Rotate::Rotate(std::shared_ptr<Hittable> _object, double theta, int _from_axis, 
     cos_theta = std::cos(theta);
     sin_theta = std::sin(theta);
 
-    Point3 min{INFINITY};
-    Point3 max{-INFINITY};
+    Point3 min{_INFINITY};
+    Point3 max{-_INFINITY};
 
     auto _bounding_box = object->BoundingBox();
 

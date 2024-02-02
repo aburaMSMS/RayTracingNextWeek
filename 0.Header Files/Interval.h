@@ -27,9 +27,6 @@ public:
     Interval Expand(double delta) const;
 };
 
-const static Interval empty;
-const static Interval universe(-_INFINITY, INFINITY);
-
 inline Interval operator+(const Interval &interval, double offset)
 {
     return Interval{interval.min + offset, interval.max + offset};

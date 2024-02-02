@@ -2,7 +2,7 @@
 
 #include "Hittable.h"
 
-/* class Transformation */
+/* Transformation */
 class Transformation : public Hittable
 {
 protected:
@@ -12,7 +12,7 @@ protected:
     std::shared_ptr<Hittable> object;
 };
 
-/* class Translate */
+/* Translate */
 class Translate : public Transformation
 {
 public:
@@ -24,7 +24,7 @@ private:
     Vector3 offset;
 };
 
-/* class Rotate */
+/* Rotate */
 class Rotate : public Transformation
 {
 public:
@@ -42,6 +42,7 @@ private:
     double sin_theta;
     int from_axis;
     int to_axis;
+    int *a;
 };
 
 /* Scale */
